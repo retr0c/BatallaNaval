@@ -1,7 +1,8 @@
 
 
 def iniciar_campo_juego(ancho, alto):
-    pass
+    return [[0] * ancho for _ in range(alto)]  
+
 
 def disparar(fila, columna):
     pass
