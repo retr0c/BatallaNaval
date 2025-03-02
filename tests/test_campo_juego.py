@@ -1,5 +1,5 @@
 import unittest
-from src.batalla_naval import iniciar_campo_juego
+from src.Juego import iniciar_campo_juego
 
 class TestIniciarCampoJuego(unittest.TestCase):
 

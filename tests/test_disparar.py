@@ -1,5 +1,5 @@
 import unittest
-from src.batalla_naval import disparar
+from src.Juego import disparar
 
 class TestDisparar(unittest.TestCase):
 

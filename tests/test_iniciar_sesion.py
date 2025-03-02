@@ -1,5 +1,5 @@
 import unittest
-from src.batalla_naval import iniciar_sesion
+from src.Jugador import iniciar_sesion
 
 class TestIniciarSesion(unittest.TestCase):
 
