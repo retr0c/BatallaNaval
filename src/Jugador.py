@@ -4,8 +4,8 @@ class Jugador:
         pass
 
 
-    def crear_cuenta(self, usuario, contraseña):
+    def crear_cuenta( usuario, contraseña):
         pass
 
-    def cambiar_contraseña(self, nueva_contraseña):
+    def cambiar_contraseña( nueva_contraseña):
         pass
