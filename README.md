@@ -28,7 +28,7 @@ Descripción: Pruebas para la correcta inicialización del campo de juego.
 
 Ubicación: tests/test_campo_juego.py
 
-![Tabla de pruebas:](ProyectoBatallaNaval/Test_iniciar-campo.png)
+![Tabla de pruebas:](ProyectoBatallaNaval/Test_iniciar-campo-de-juego.png)
 
 
 
