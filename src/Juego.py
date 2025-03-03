@@ -5,3 +5,6 @@ class Juego():
     
     def disparar(fila, columna):
         pass
+
+
+#img
