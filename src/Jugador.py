@@ -1,5 +1,5 @@
 
-class Jugador:
+class Jugador():
     def iniciar_sesion(usuario, contraseña):
         pass
 
