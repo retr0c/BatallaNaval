@@ -17,8 +17,7 @@ Descripción: Pruebas para verificar el proceso de inicio de sesión.
 
 Ubicación: tests/test_iniciar_sesion.py
 
-![Tabla de pruebas:](ProyectoBatallaNaval\Test-iniciar-sesion.png)
-
+![Tabla de pruebas:](ProyectoBatallaNaval/Test-iniciar-sesion.png)
 
 
 2. test_campo_juego
@@ -27,7 +26,7 @@ Descripción: Pruebas para la correcta inicialización del campo de juego.
 
 Ubicación: tests/test_campo_juego.py
 
-![Tabla de pruebas:](ProyectoBatallaNaval\Test_iniciar-campo-de-juego.png)
+![Tabla de pruebas:](ProyectoBatallaNaval/Test_iniciar-campo-de-juego.png)
 
 
 
@@ -37,7 +36,7 @@ Descripción: Pruebas para el proceso de creación de una nueva cuenta.
 
 Ubicación: tests/test_crear_cuenta.py
 
-![Tabla de pruebas:](ProyectoBatallaNaval\Test-crear-cuenta.png)
+![Tabla de pruebas:](ProyectoBatallaNaval/Test-crear-cuenta.png)
 
 
 
@@ -47,7 +46,7 @@ Descripción: Pruebas para verificar la acción de disparar en el juego.
 
 Ubicación: tests/test_disparar.py
 
-![Tabla de pruebas:](ProyectoBatallaNaval\Test-Disparar.png)
+![Tabla de pruebas:](ProyectoBatallaNaval/Test-Disparar.png)
 
 
 
@@ -57,8 +56,7 @@ Descripción: Pruebas para verificar el proceso de cambio de contraseña.
 
 Ubicación: tests/test_cambiar_contrasena.py
 
-![Tabla de pruebas:](ProyectoBatallaNaval\Test-cambiar-contraseña.png)
-
+![Tabla de pruebas:](ProyectoBatallaNaval/Test-cambiar-contraseña.png)
 
 6. test_puntuacion
 
@@ -66,13 +64,13 @@ Descripción: Pruebas para verificar el sistema de puntuación del juego.
 
 Ubicación: tests/test_puntuacion.py
 
-![Tabla de pruebas:](ProyectoBatallaNaval\Test-visualizar-puntacion.png)
+![Tabla de pruebas:](ProyectoBatallaNaval/Test-visualizar-puntacion.png)
 
 
 
 Diagrama de clases:
 
-![d:](ProyectoBatallaNaval\DiagramadeClases.png)
+![Diagrama de clases:](ProyectoBatallaNaval/DiagramadeClases.png)
 
 
 
