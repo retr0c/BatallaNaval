@@ -1,0 +1,7 @@
+.vscode/
+.anaconda/
+.bash_history
+.conda/
+.gitconfig
+AppData/
+Documents/
