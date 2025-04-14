@@ -1,28 +1,20 @@
-from kivy.uix.screenmanager import Screen
-from BatallaNaval.src.Jugador import Jugador
+# BatallaNaval/src/views/menu_kivy_controller.py
 
-jugador = Jugador()
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager, FadeTransition
+from kivy.lang import Builder
+import os
 
-class MenuInicio(Screen):
+KV_PATH = os.path.join(os.path.dirname(__file__), "screens.kv")
+
+class GestorPantallas(ScreenManager):
     pass
 
-class CrearCuenta(Screen):
-    def crear_cuenta(self):
-        usuario = self.ids.usuario_input.text
-        contraseña = self.ids.contraseña_input.text
-        resultado = jugador.crear_cuenta(usuario, contraseña)
-        self.ids.resultado.text = resultado
+class BatallaNavalApp(App):
+    def build(self):
+        Builder.load_file(KV_PATH)
+        sm = GestorPantallas(transition=FadeTransition())
+        return sm
 
-class IniciarSesion(Screen):
-    def iniciar_sesion(self):
-        usuario = self.ids.usuario_login.text
-        contraseña = self.ids.contraseña_login.text
-        resultado = jugador.iniciar_sesion(usuario, contraseña)
-        self.ids.resultado_login.text = resultado
-        if resultado == "Sesión iniciada":
-            self.manager.current = "menu_principal"
-
-class MenuPrincipal(Screen):
-    def cerrar_sesion(self):
-        jugador.cerrar_sesion()
-        self.manager.current = "menu_inicio"
+def iniciar_aplicacion():
+    BatallaNavalApp().run()
