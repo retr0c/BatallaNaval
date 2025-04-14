@@ -1,8 +1,8 @@
 from BatallaNaval.src.Jugador import Jugador
 from BatallaNaval.src.Juego import Juego
-import sys
-
 from BatallaNaval.src.Puntuacion import Puntuacion
+
+puntuaciones_jugadores = {}
 
 def mostrar_campo(campo, revelar=False):
     for fila in campo:
@@ -15,7 +15,7 @@ def mostrar_campo(campo, revelar=False):
             else:
                 linea += " ~ "
         print(linea)
-    print()  
+    print()
 
 def mostrar_menu():
     print("\n🚢 ¡Bienvenido a Batalla Naval! 🚢")
@@ -43,28 +43,23 @@ def menu_principal(jugador):
             break
         else:
             print("❌ Opción inválida, intenta de nuevo.")
-            
 
 def cerrar_sesion(jugador):
-    global puntuaciones_jugadores  
+    global puntuaciones_jugadores
 
     if jugador.usuario_actual in puntuaciones_jugadores:
-        puntuaciones_jugadores[jugador.usuario_actual] = 0  
-    
-    print(f"👋 {jugador.usuario_actual}, has cerrado sesión. Tu puntuación ha sido reiniciada.")
-    jugador.cerrar_sesion()  
-            
+        puntuaciones_jugadores[jugador.usuario_actual] = 0
 
-puntuaciones_jugadores = {}
+    print(f"👋 {jugador.usuario_actual}, has cerrado sesión. Tu puntuación ha sido reiniciada.")
+    jugador.cerrar_sesion()
 
 def jugar(jugador):
-    global puntuaciones_jugadores  
-    
+    global puntuaciones_jugadores
+
     juego = Juego()
-    
-    
+
     if jugador not in puntuaciones_jugadores:
-        puntuaciones_jugadores[jugador] = 0  
+        puntuaciones_jugadores[jugador] = 0
 
     try:
         ancho = int(input("Ingrese el ancho del campo de juego: "))
@@ -90,9 +85,9 @@ def jugar(jugador):
         try:
             resultado = juego.disparar(campo, fila, columna)
             if resultado == "¡Impacto!":
-                puntuaciones_jugadores[jugador] += 10  
+                puntuaciones_jugadores[jugador] += 10
             elif resultado == "Agua":
-                puntuaciones_jugadores[jugador] -= 2  
+                puntuaciones_jugadores[jugador] -= 2
 
             print(f"🎯 Resultado: {resultado}")
             print(f"⭐ Puntuación actual: {puntuaciones_jugadores[jugador]}")
@@ -111,9 +106,6 @@ def jugar(jugador):
             print(f"📊 Puntuación final: {puntuaciones_jugadores[jugador]}")
             print("Saliendo del juego...")
             break
-
-
-
 
 def main():
     jugador = Jugador()
@@ -137,6 +129,3 @@ def main():
             break
         else:
             print("❌ Opción inválida, intenta de nuevo.")
-
-if __name__ == "__main__":
-    main()
