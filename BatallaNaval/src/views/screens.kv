@@ -1,0 +1,44 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<GestorPantallas>:
+    IniciarSesionView:
+    CrearCuentaView:
+    MenuPrincipalView:
+    JuegoView:
+
+# Esta parte define el diseño visual de cada pantalla:
+
+<IniciarSesionView>:
+    name: "iniciar_sesion"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 20
+        padding: 40
+
+        Label:
+            text: "Iniciar Sesión"
+            font_size: 24
+
+        TextInput:
+            id: usuario_input
+            hint_text: "Usuario"
+
+        TextInput:
+            id: contraseña_input
+            hint_text: "Contraseña"
+            password: True
+
+        Button:
+            text: "Ingresar"
+            on_release:
+                app.root.current = "menu_principal"  # Esto cambia de pantalla
+
+        Button:
+            text: "Volver"
+            on_release:
+                app.root.current = "menu_principal"
+
+# Luego harás lo mismo para cada pantalla nueva, así:
+# <CrearCuentaView>:
+# <MenuPrincipalView>:
+# <JuegoView>:
