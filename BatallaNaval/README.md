@@ -75,7 +75,7 @@ Diagrama de clases:
 
 
 Para ejecutar las pruebas:
- python -m unittest discover -s tests -p "test_*.py"
+python -m unittest discover -s tests -p "test_*.py"
 
 Para ejecutar el programa:
 python menu.py

@@ -1,24 +1,21 @@
 from kivy.uix.screenmanager import Screen
-from BatallaNaval.src.Jugador import Jugador
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-from kivy.app import App
+from BatallaNaval.src.Jugador import Jugador
 
 class IniciarSesionScreen(Screen):
-    def iniciar_sesion(self):
-        usuario = self.ids.usuario_input.text
-        contraseña = self.ids.contraseña_input.text
-        jugador = Jugador()
-        resultado = jugador.iniciar_sesion(usuario, contraseña)
+    # Para facilitar la comunicación, guardaremos el jugador en la pantalla de inicio de sesión
+    def __init__(self, **kwargs):
+        super(IniciarSesionScreen, self).__init__(**kwargs)
+        self.jugador = Jugador()  # Instancia global del jugador
 
+    def iniciar_sesion(self, usuario, contraseña):
+        print(f"Intentando iniciar sesión:\nUsuario: {usuario}\nContraseña: {contraseña}")
+        resultado = self.jugador.iniciar_sesion(usuario, contraseña)
         if resultado == "Sesión iniciada":
-            # Guardamos el jugador en la App para accederlo desde otras pantallas
-            App.get_running_app().jugador = jugador
-
-            self.mostrar_popup("✅ Éxito", "Sesión iniciada correctamente")
             self.manager.current = "menu_principal"
         else:
-            self.mostrar_popup("❌ Error", resultado)
+            self.mostrar_popup("Error", resultado)
 
     def mostrar_popup(self, titulo, mensaje):
         popup = Popup(title=titulo,
