@@ -1,32 +1,55 @@
-# src/views/crear_cuenta_view.py
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ObjectProperty
-from src.Jugador import Jugador
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+from kivy.uix.popup import Popup
+from BatallaNaval.src.Jugador import Jugador  
 
 class CrearCuentaScreen(Screen):
-    username_input = ObjectProperty(None)
-    password_input = ObjectProperty(None)
-    confirm_password_input = ObjectProperty(None)
-    status_label = ObjectProperty(None)
-    
-    def crear_cuenta(self):
-        username = self.username_input.text
-        password = self.password_input.text
-        confirm_password = self.confirm_password_input.text
+    def __init__(self, **kwargs):
+        super(CrearCuentaScreen, self).__init__(**kwargs)
         
-        if password != confirm_password:
-            self.status_label.text = "Las contraseñas no coinciden"
-            return
+        layout = BoxLayout(orientation='vertical', padding=50, spacing=20)
+        
+        # Título
+        title = Label(text="📝 Crear Cuenta", font_size=32, size_hint_y=None, height=60)
+        layout.add_widget(title)
+
+        # Campos de texto
+        self.usuario_input = TextInput(hint_text="Nuevo Usuario", multiline=False)
+        self.contraseña_input = TextInput(hint_text="Contraseña", password=True, multiline=False)
+        
+        layout.add_widget(self.usuario_input)
+        layout.add_widget(self.contraseña_input)
+
+        # Botón para crear cuenta
+        btn_crear = Button(text="Crear Cuenta")
+        btn_crear.bind(on_press=self.crear_cuenta)
+        layout.add_widget(btn_crear)
+
+        self.add_widget(layout)
+
+    def crear_cuenta(self, instance):
+        usuario = self.usuario_input.text
+        contraseña = self.contraseña_input.text
         
         # Lógica para crear cuenta
-        jugador = Jugador()
-        resultado = jugador.crear_cuenta(username, password)
-        
-        if resultado:
-            self.status_label.text = "Cuenta creada correctamente"
-            self.manager.current = 'iniciar_sesion'
+        if usuario and contraseña:
+            # Aquí puedes conectar con tu lógica de creación de cuenta
+            jugador = Jugador()  # Asumiendo que tienes una clase Jugador
+            resultado = jugador.crear_cuenta(usuario, contraseña)  # Cambiar a tu lógica real
+            
+            if resultado == "Cuenta creada con éxito":
+                self.mostrar_popup("✅ Éxito", "Cuenta creada correctamente")
+                self.manager.current = "iniciar_sesion"  # Cambiar a la pantalla de inicio de sesión
+            else:
+                self.mostrar_popup("❌ Error", resultado)
         else:
-            self.status_label.text = "Error al crear la cuenta"
-    
-    def volver_menu(self):
-        self.manager.current = 'menu_principal'
+            self.mostrar_popup("❌ Error", "Por favor, complete todos los campos.")
+
+    def mostrar_popup(self, titulo, mensaje):
+        popup = Popup(title=titulo,
+                      content=Label(text=mensaje),
+                      size_hint=(None, None), size=(300, 200))
+        popup.open()

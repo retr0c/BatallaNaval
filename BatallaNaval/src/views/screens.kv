@@ -1,44 +1,103 @@
-#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+# Configuración para el ScreenManager
+ScreenManager:
+    id: screen_manager
+    IniciarSesionScreen:
+    CrearCuentaScreen:
+    MenuPrincipalScreen:
+    JuegoScreen:
 
-<GestorPantallas>:
-    IniciarSesionView:
-    CrearCuentaView:
-    MenuPrincipalView:
-    JuegoView:
-
-# Esta parte define el diseño visual de cada pantalla:
-
-<IniciarSesionView>:
+<IniciarSesionScreen>:
     name: "iniciar_sesion"
     BoxLayout:
-        orientation: "vertical"
+        orientation: 'vertical'
+        padding: 50
         spacing: 20
-        padding: 40
 
         Label:
-            text: "Iniciar Sesión"
-            font_size: 24
+            text: "🔐 Iniciar Sesión"
+            font_size: 32
+            size_hint_y: None
+            height: 60
+
+        TextInput:
+            id: usuario_login
+            hint_text: "Usuario"
+            multiline: False
+
+        TextInput:
+            id: contraseña_login
+            hint_text: "Contraseña"
+            password: True
+            multiline: False
+
+        Button:
+            text: "Ingresar"
+            on_press: root.iniciar_sesion(usuario_login.text, contraseña_login.text)
+
+        Button:
+            text: "¿No tienes cuenta? Crear una"
+            on_press: root.manager.current = "crear_cuenta"
+
+<CrearCuentaScreen>:
+    name: "crear_cuenta"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+
+        Label:
+            text: "📝 Crear Cuenta"
+            font_size: 32
+            size_hint_y: None
+            height: 60
 
         TextInput:
             id: usuario_input
-            hint_text: "Usuario"
+            hint_text: "Nuevo Usuario"
+            multiline: False
 
         TextInput:
             id: contraseña_input
             hint_text: "Contraseña"
             password: True
+            multiline: False
 
         Button:
-            text: "Ingresar"
-            on_release:
-                app.root.current = "menu_principal"  # Esto cambia de pantalla
+            text: "Crear Cuenta"
+            on_press: root.crear_cuenta(usuario_input.text, contraseña_input.text)
+
+<MenuPrincipalScreen>:
+    name: "menu_principal"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
 
         Button:
-            text: "Volver"
-            on_release:
-                app.root.current = "menu_principal"
+            text: "Jugar"
+            on_press: root.manager.current = "juego"
 
-# Luego harás lo mismo para cada pantalla nueva, así:
-# <CrearCuentaView>:
-# <MenuPrincipalView>:
-# <JuegoView>:
+        Button:
+            text: "Cambiar Contraseña"
+            on_press: root.cambiar_contraseña()
+
+        Button:
+            text: "Cerrar Sesión"
+            on_press: root.manager.current = "iniciar_sesion"
+
+<JuegoScreen>:
+    name: "juego"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+
+        Label:
+            text: "🎮 ¡Bienvenido al juego!"
+            font_size: 32
+            size_hint_y: None
+            height: 60
+
+        Button:
+            text: "Volver al Menú"
+            on_press: root.manager.current = "menu_principal"
