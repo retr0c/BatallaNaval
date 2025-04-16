@@ -6,6 +6,7 @@ class TestIniciarCampoJuego(unittest.TestCase):
     def setUp(self):
         self.juego = Juego()
 
+    # Casos normales
     def test_campo_10x10(self):
         campo = self.juego.iniciar_campo_juego(10, 10)
         self.assertEqual(len(campo), 10)
@@ -22,6 +23,7 @@ class TestIniciarCampoJuego(unittest.TestCase):
             for celda in fila:
                 self.assertIn(celda, [0, 1])
 
+    # Casos extremos
     def test_campo_1x1(self):
         campo = self.juego.iniciar_campo_juego(1, 1)
         self.assertEqual(len(campo), 1)
@@ -33,11 +35,12 @@ class TestIniciarCampoJuego(unittest.TestCase):
         self.assertEqual(len(campo[0]), 100)
 
     def test_campo_sin_naves(self):
-        campo = self.juego.iniciar_campo_juego(10, 10, 0)  # Suponiendo que el tercer parámetro es cantidad de naves
+        campo = self.juego.iniciar_campo_juego(10, 10, 0)
         for fila in campo:
             for celda in fila:
                 self.assertEqual(celda, 0)
 
+    # Casos de error
     def test_dimensiones_negativas(self):
         with self.assertRaises(ValueError):
             self.juego.iniciar_campo_juego(-5, 5)

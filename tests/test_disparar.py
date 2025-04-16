@@ -6,7 +6,7 @@ class TestDisparar(unittest.TestCase):
     def setUp(self):
         self.juego = Juego()
 
-    # N
+    # Normales
     def test_disparo_acierto(self):
         campo = [[0, 1], [0, 0]]
         resultado = self.juego.disparar(campo, 0, 1)
@@ -23,7 +23,7 @@ class TestDisparar(unittest.TestCase):
         resultado = self.juego.disparar(campo, 0, 1)
         self.assertEqual(resultado, "Ya disparaste aquí")
 
-    # E
+    # Extremas
     def test_disparo_en_borde(self):
         campo = [[1, 0], [0, 0]]
         resultado = self.juego.disparar(campo, 0, 0)
@@ -39,7 +39,7 @@ class TestDisparar(unittest.TestCase):
         with self.assertRaises(IndexError):
             self.juego.disparar(campo, 2, 2)
 
-    # E
+    # Error
     def test_disparo_fila_negativa(self):
         campo = [[0, 1], [0, 0]]
         with self.assertRaises(IndexError):

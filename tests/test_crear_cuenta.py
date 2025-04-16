@@ -3,7 +3,7 @@ from BatallaNaval.src.Jugador import Jugador
 
 class TestCrearCuenta(unittest.TestCase):
 
-    # N - Casos normales
+    # Casos normales
     def test_creacion_exitosa(self):
         jugador = Jugador()
         resultado = jugador.crear_cuenta("usuario1", "contraseña123")
@@ -19,7 +19,7 @@ class TestCrearCuenta(unittest.TestCase):
         resultado = jugador.crear_cuenta("usuario2", "contraseñaMuyLarga123456")
         self.assertEqual(resultado, "Cuenta creada exitosamente")
 
-    # E - Casos extremos
+    # Casos extremos
     def test_usuario_corto(self):
         jugador = Jugador()
         resultado = jugador.crear_cuenta("u", "clave123")
@@ -37,7 +37,7 @@ class TestCrearCuenta(unittest.TestCase):
         resultado = jugador.crear_cuenta(usuario_largo, contraseña_larga)
         self.assertEqual(resultado, "Cuenta creada exitosamente")
 
-    # E - Casos de error
+    # Casos de error
     def test_usuario_vacio(self):
         jugador = Jugador()
         resultado = jugador.crear_cuenta("", "contraseña123")

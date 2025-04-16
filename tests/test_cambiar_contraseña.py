@@ -6,7 +6,7 @@ class TestCambiarContraseña(unittest.TestCase):
     def setUp(self):
         self.jugador = Jugador("usuario1", "contraseña123")
 
-    #E
+    # Casos normales
     def test_cambiar_contraseña_exitosa(self):
         resultado = self.jugador.cambiar_contraseña("nuevaContraseña456")
         self.assertEqual(resultado, "Contraseña cambiada exitosamente")
@@ -19,7 +19,7 @@ class TestCambiarContraseña(unittest.TestCase):
         resultado = self.jugador.cambiar_contraseña("Valida123$")
         self.assertEqual(resultado, "Contraseña cambiada exitosamente")
 
-    #E
+    # Casos extremos
     def test_cambiar_contraseña_minima_longitud(self):
         resultado = self.jugador.cambiar_contraseña("abc12")
         self.assertEqual(resultado, "Contraseña demasiado corta")
@@ -33,7 +33,7 @@ class TestCambiarContraseña(unittest.TestCase):
         resultado = self.jugador.cambiar_contraseña("Contraseña@#456")
         self.assertEqual(resultado, "Contraseña cambiada exitosamente")
 
-    #E
+    # Casos de error
     def test_cambiar_contraseña_vacia(self):
         resultado = self.jugador.cambiar_contraseña("")
         self.assertEqual(resultado, "La contraseña no puede estar vacía")

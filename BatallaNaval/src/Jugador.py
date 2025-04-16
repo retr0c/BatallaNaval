@@ -2,12 +2,29 @@ class Jugador:
     """Clase para el manejo de usuarios del juego."""
 
     def __init__(self, usuario=None, contraseña=None):
+        """
+        Inicializa la clase Jugador con un usuario opcional.
+
+        Args:
+            usuario (str, optional): Nombre del usuario.
+            contraseña (str, optional): Contraseña del usuario.
+        """
         self.usuarios = {}
         self.usuario_actual = None
         if usuario and contraseña:
             self.usuarios[usuario] = contraseña
 
     def crear_cuenta(self, usuario, contraseña):
+        """
+        Crea una nueva cuenta de usuario.
+
+        Args:
+            usuario (str): Nombre del usuario.
+            contraseña (str): Contraseña del usuario.
+
+        Returns:
+            str: Mensaje indicando el resultado de la operación.
+        """
         if usuario == "" and contraseña == "":
             return "Las credenciales no pueden estar vacías"
         if not usuario:
@@ -21,6 +38,19 @@ class Jugador:
         return "Cuenta creada exitosamente"
 
     def iniciar_sesion(self, usuario, contraseña):
+        """
+        Inicia sesión con las credenciales dadas.
+
+        Args:
+            usuario (str): Nombre del usuario.
+            contraseña (str): Contraseña del usuario.
+
+        Returns:
+            str: Mensaje indicando el resultado del intento de inicio de sesión.
+
+        Raises:
+            TypeError: Si usuario o contraseña son None.
+        """
         if usuario is None or contraseña is None:
             raise TypeError("Los valores no pueden ser None")
         if not usuario and not contraseña:
@@ -38,6 +68,9 @@ class Jugador:
         return "Sesión iniciada"
 
     def cerrar_sesion(self):
+        """
+        Cierra la sesión del usuario actual.
+        """
         if self.usuario_actual:
             print(f"👋 {self.usuario_actual}, has cerrado sesión.")
             self.usuario_actual = None
@@ -45,6 +78,18 @@ class Jugador:
             print("⚠ No hay ninguna sesión activa.")
 
     def cambiar_contraseña(self, nueva_contraseña):
+        """
+        Cambia la contraseña del usuario actual.
+
+        Args:
+            nueva_contraseña (str): La nueva contraseña.
+
+        Returns:
+            str: Mensaje indicando el resultado de la operación.
+
+        Raises:
+            TypeError: Si la contraseña es None o no es una cadena.
+        """
         if nueva_contraseña is None:
             raise TypeError("La contraseña no puede ser None")
         if not nueva_contraseña:

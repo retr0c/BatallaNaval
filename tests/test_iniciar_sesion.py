@@ -7,7 +7,7 @@ class TestIniciarSesion(unittest.TestCase):
         self.jugador = Jugador()
         self.jugador.crear_cuenta("usuario1", "contraseña123")
 
-    # N
+    # Normales
     def test_sesion_exitosa(self):
         resultado = self.jugador.iniciar_sesion("usuario1", "contraseña123")
         self.assertEqual(resultado, "Sesión iniciada")
@@ -20,7 +20,7 @@ class TestIniciarSesion(unittest.TestCase):
         resultado = self.jugador.iniciar_sesion("usuario1", "contraseña_erronea")
         self.assertEqual(resultado, "Contraseña incorrecta")
 
-    # E
+    # Extremas
     def test_usuario_vacio(self):
         resultado = self.jugador.iniciar_sesion("", "contraseña123")
         self.assertEqual(resultado, "Usuario no puede estar vacío")
@@ -33,7 +33,7 @@ class TestIniciarSesion(unittest.TestCase):
         resultado = self.jugador.iniciar_sesion("", "")
         self.assertEqual(resultado, "Credenciales incompletas")
 
-    # E
+    # Error
     def test_usuario_nulo(self):
         with self.assertRaises(TypeError):
             self.jugador.iniciar_sesion(None, "contraseña123")

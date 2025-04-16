@@ -1,23 +1,19 @@
 import unittest
 from BatallaNaval.src.Puntuacion import Puntuacion
 
-
-
 class TestVisualizarPuntuaciones(unittest.TestCase):
 
+    # Normales
     def test_agregar_puntuacion_correcta(self):
         puntuacion = Puntuacion()
         puntuacion.agregar_puntuacion(250)
         self.assertEqual(puntuacion.puntuaciones, [250])
-        
+
     def test_agregar_puntuacion_invalida(self):
         puntuacion = Puntuacion()
         with self.assertRaises(ValueError):
             puntuacion.agregar_puntuacion("cien")
-    
 
-    
-    # Pruebas normales (N)
     def test_visualizar_con_puntuaciones(self):
         puntuacion = Puntuacion()
         puntuacion.puntuaciones = [100, 200, 300]
@@ -36,7 +32,7 @@ class TestVisualizarPuntuaciones(unittest.TestCase):
         resultado = puntuacion.visualizar_puntuaciones()
         self.assertEqual(resultado, [])
 
-    # Pruebas extremas (E)
+    # Extremas
     def test_visualizar_puntuaciones_maximas(self):
         puntuacion = Puntuacion()
         puntuacion.puntuaciones = [99999] * 1000
@@ -57,7 +53,7 @@ class TestVisualizarPuntuaciones(unittest.TestCase):
         resultado = puntuacion.visualizar_puntuaciones()
         self.assertEqual(resultado, [1, 100, 10000, 500, 50])
 
-    # Pruebas de error (E)
+    # Error
     def test_visualizar_puntuaciones_nulas(self):
         puntuacion = Puntuacion()
         puntuacion.puntuaciones = None
