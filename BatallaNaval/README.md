@@ -78,4 +78,5 @@ Para ejecutar las pruebas:
 python -m unittest discover -s tests -p "test_*.py"
 
 Para ejecutar el programa:
-python menu.py
+python menu_consola.py
+python menu_grafico.py

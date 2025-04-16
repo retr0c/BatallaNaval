@@ -5,6 +5,10 @@ from BatallaNaval.src.Juego import Juego
 from BatallaNaval.src.Jugador import Jugador
 
 class JuegoScreen(Screen):
+    """
+    Pantalla del juego principal de Batalla Naval.
+    Permite configurar el campo, disparar, mostrar el campo y puntuar.
+    """
     def __init__(self, **kwargs):
         super(JuegoScreen, self).__init__(**kwargs)
         self.juego = None
@@ -13,6 +17,9 @@ class JuegoScreen(Screen):
         self.jugador = None
 
     def iniciar_juego(self):
+        """
+        Inicializa el campo de batalla con los parámetros dados por el usuario.
+        """
         try:
             ancho = int(self.ids.ancho_input.text)
             alto = int(self.ids.alto_input.text)
@@ -29,6 +36,9 @@ class JuegoScreen(Screen):
         self.mostrar_campo()
 
     def disparar(self):
+        """
+        Realiza un disparo en la posición indicada por el usuario y actualiza el campo.
+        """
         try:
             fila = int(self.ids.fila_input.text) - 1
             columna = int(self.ids.columna_input.text) - 1
@@ -53,37 +63,46 @@ class JuegoScreen(Screen):
 
         self.mostrar_popup("Resultado", f"{resultado}\nPuntuación: {self.score}")
         self.mostrar_campo()
-
-        # Verificar si quedan naves (celdas con 1)
-        game_over = True
-        for row in self.campo:
-            if 1 in row:
-                game_over = False
-                break
-        if game_over:
-            self.mostrar_popup("Fin del Juego", f"¡Has hundido todas las naves!\nPuntuación final: {self.score}")
-            self.manager.current = "menu_principal"
+        self.verificar_fin_juego()
 
     def mostrar_campo(self):
+        """
+        Muestra el campo de batalla en el label correspondiente.
+        """
         campo_str = ""
         for row in self.campo:
             line = ""
             for celda in row:
                 if celda == "X":
                     line += " X "
-                elif celda == 1:
-                    line += " ~ "
                 else:
                     line += " ~ "
             campo_str += line + "\n"
-        
+
         self.ids.campo_label.markup = False
         self.ids.campo_label.text = campo_str
-        
+
+    def verificar_fin_juego(self):
+        """
+        Verifica si todas las naves han sido hundidas y finaliza el juego si es así.
+        """
+        for row in self.campo:
+            if 1 in row:
+                return  # Aún quedan naves
+
+        self.mostrar_popup("Fin del Juego", f"¡Has hundido todas las naves!\nPuntuación final: {self.score}")
+        self.manager.current = "menu_principal"
+
     def salir_juego(self):
+        """
+        Regresa al menú principal.
+        """
         self.manager.current = "menu_principal"
 
     def mostrar_popup(self, titulo, mensaje):
+        """
+        Muestra un popup con un mensaje.
+        """
         popup = Popup(title=titulo, content=Label(text=mensaje),
                       size_hint=(None, None), size=(300, 200))
         popup.open()

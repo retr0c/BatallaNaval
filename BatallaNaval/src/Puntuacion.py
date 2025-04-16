@@ -1,4 +1,6 @@
 class Puntuacion:
+    """Clase que administra la lista de puntuaciones del juego."""
+
     def __init__(self):
         self.puntuaciones = []
 

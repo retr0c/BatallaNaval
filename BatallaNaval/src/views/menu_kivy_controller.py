@@ -2,20 +2,26 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, FadeTransition
 from kivy.lang import Builder
 import os
+
 from BatallaNaval.src.views.iniciar_sesion_view import IniciarSesionScreen
 from BatallaNaval.src.views.crear_cuenta_view import CrearCuentaScreen
 from BatallaNaval.src.views.menu_principal_view import MenuPrincipalScreen
 from BatallaNaval.src.views.juego_view import JuegoScreen
 
-# Ruta al archivo KV
+# Ruta al archivo KV con las vistas
 KV_PATH = os.path.join(os.path.dirname(__file__), "screens.kv")
 
-# Clase principal del ScreenManager
 class GestorPantallas(ScreenManager):
+    """
+    Administrador de pantallas con transición personalizada.
+    """
     pass
 
-# Clase de la aplicación
 class BatallaNavalApp(App):
+    """
+    Clase principal de la aplicación Batalla Naval.
+    Se encarga de inicializar y cargar todas las vistas.
+    """
     def build(self):
         Builder.load_file(KV_PATH)
         sm = GestorPantallas(transition=FadeTransition())
@@ -25,6 +31,8 @@ class BatallaNavalApp(App):
         sm.add_widget(JuegoScreen(name='juego'))
         return sm
 
-# Función para iniciar la aplicación
 def iniciar_aplicacion():
+    """
+    Punto de entrada para ejecutar la aplicación.
+    """
     BatallaNavalApp().run()

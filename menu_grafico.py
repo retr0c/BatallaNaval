@@ -1,4 +1,3 @@
-# menu_grafico.py
 
 from BatallaNaval.src.views.menu_kivy_controller import iniciar_aplicacion
 

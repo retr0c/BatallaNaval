@@ -5,6 +5,7 @@ from BatallaNaval.src.Puntuacion import Puntuacion
 puntuaciones_jugadores = {}
 
 def mostrar_campo(campo, revelar=False):
+    """Muestra el campo de juego en consola."""
     for fila in campo:
         linea = ""
         for celda in fila:
@@ -18,12 +19,14 @@ def mostrar_campo(campo, revelar=False):
     print()
 
 def mostrar_menu():
+    """Muestra el menú inicial del juego."""
     print("\n🚢 ¡Bienvenido a Batalla Naval! 🚢")
     print("1️⃣ Crear cuenta")
     print("2️⃣ Iniciar sesión")
     print("3️⃣ Salir")
 
 def menu_principal(jugador):
+    """Muestra el menú principal una vez iniciada la sesión."""
     while True:
         print("\n🎮 Menú Principal 🎮")
         print("1️⃣ Jugar")
@@ -45,6 +48,7 @@ def menu_principal(jugador):
             print("❌ Opción inválida, intenta de nuevo.")
 
 def cerrar_sesion(jugador):
+    """Cierra la sesión del jugador actual."""
     global puntuaciones_jugadores
 
     if jugador.usuario_actual in puntuaciones_jugadores:
@@ -54,6 +58,7 @@ def cerrar_sesion(jugador):
     jugador.cerrar_sesion()
 
 def jugar(jugador):
+    """Ejecuta la lógica del juego."""
     global puntuaciones_jugadores
 
     juego = Juego()
@@ -108,6 +113,7 @@ def jugar(jugador):
             break
 
 def main():
+    """Punto de entrada principal de la aplicación por consola."""
     jugador = Jugador()
     while True:
         mostrar_menu()

@@ -1,5 +1,6 @@
-
 class Jugador:
+    """Clase para el manejo de usuarios del juego."""
+
     def __init__(self, usuario=None, contraseña=None):
         self.usuarios = {}
         self.usuario_actual = None
@@ -15,7 +16,7 @@ class Jugador:
             return "La contraseña no puede estar vacía"
         if usuario in self.usuarios:
             return "El usuario ya existe"
-        
+
         self.usuarios[usuario] = contraseña
         return "Cuenta creada exitosamente"
 
@@ -32,10 +33,10 @@ class Jugador:
             return "Usuario no encontrado"
         if self.usuarios[usuario] != contraseña:
             return "Contraseña incorrecta"
-        
-        self.usuario_actual = usuario 
+
+        self.usuario_actual = usuario
         return "Sesión iniciada"
-    
+
     def cerrar_sesion(self):
         if self.usuario_actual:
             print(f"👋 {self.usuario_actual}, has cerrado sesión.")
