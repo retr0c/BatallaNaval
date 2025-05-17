@@ -72,6 +72,13 @@ Diagrama de clases:
 
 ![Diagrama de clases:](ProyectoBatallaNaval/DiagramadeClases.png)
 
+instalar los requerimientos:
+pip install -r requirements.txt
+
+⚠️ Antes de ejecutar setup_db.py, asegúrate de tener PostgreSQL instalado, corriendo en el sistema y cambiar la contraseña del superusuario en el archivo setup_db.py si no es "postgres".
+        
+Configurar todo:
+python setup_db.py
 
 
 Para ejecutar las pruebas:
@@ -80,3 +87,5 @@ python -m unittest discover -s tests -p "test_*.py"
 Para ejecutar el programa:
 python menu_consola.py
 python menu_grafico.py
+
+

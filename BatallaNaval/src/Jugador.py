@@ -1,12 +1,12 @@
 from BatallaNaval.base_datos.db import crear_usuario, obtener_usuario,  actualizar_contrasena
 
-
 class Jugador:
     """Clase para el manejo de usuarios del juego."""
 
-    def __init__(self):
-        """Inicializa la clase Jugador sin usuarios predefinidos."""
-        self.usuario_actual = None
+    def __init__(self, nombre=None, contrasena=None):
+        """Inicializa la clase Jugador con usuario opcionalmente activo."""
+        self.usuario_actual = nombre
+        self.contrasena = contrasena
 
     def crear_cuenta(self, usuario, contraseña):
         """Crea una nueva cuenta de usuario."""
@@ -28,14 +28,31 @@ class Jugador:
         """Cambia la contraseña del usuario actual."""
         if not self.usuario_actual:
             return "No hay sesión activa"
-        if not nueva_contraseña:
-            return "La nueva contraseña no puede estar vacía"
+        
+        if nueva_contraseña is None:
+            raise TypeError("La contraseña no puede ser None")
+        
+        if not isinstance(nueva_contraseña, str):
+            raise TypeError("La contraseña debe ser un string")
+        
+        if nueva_contraseña == "":
+            return "La contraseña no puede estar vacía"
+        
+        if nueva_contraseña == self.contrasena:
+            return "La nueva contraseña no puede ser igual a la actual"
 
-        resultado = actualizar_contrasena(self.usuario_actual, nueva_contraseña)
-        if resultado:
-            return "Contraseña actualizada correctamente"
+        if len(nueva_contraseña) < 6:
+            return "Contraseña demasiado corta"
+        
+        if len(nueva_contraseña) > 100:
+            return "Contraseña demasiado larga"
+
+        actualizado = actualizar_contrasena(self.usuario_actual, nueva_contraseña)
+        if actualizado:
+            self.contrasena = nueva_contraseña
+            return "Contraseña cambiada exitosamente"
         else:
-            return "Error al actualizar la contraseña"    
+            return "Error al actualizar la contraseña"  
 
     def iniciar_sesion(self, usuario, contraseña):
         """Inicia sesión con las credenciales dadas."""

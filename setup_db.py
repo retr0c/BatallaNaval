@@ -12,7 +12,7 @@ DB_PASSWORD = "tu_clave_segura"
 DB_HOST = "localhost"
 DB_PORT = "5432"
 POSTGRES_SUPERUSER = "postgres"
-POSTGRES_PASSWORD = "felipe12ortiz22"  # Cambia esto si tu clave de postgres es distinta
+POSTGRES_PASSWORD = "postgres"  # Cambia esto si tu clave de postgres es distinta
 
 def crear_base_datos():
     print("🔧 Conectando como superusuario para crear base de datos y usuario...")
