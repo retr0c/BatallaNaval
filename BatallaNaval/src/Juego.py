@@ -1,5 +1,7 @@
 import random
 
+
+
 class Juego:
     """Clase que maneja la lógica del juego Batalla Naval."""
 
