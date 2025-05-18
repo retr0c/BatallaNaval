@@ -3,7 +3,6 @@ from BatallaNaval.src.Jugador import Jugador
 
 class TestCrearCuenta(unittest.TestCase):
 
-    # Casos normales
     def test_creacion_exitosa(self):
         jugador = Jugador()
         resultado = jugador.crear_cuenta("usuario1", "contraseña123")
@@ -37,7 +36,12 @@ class TestCrearCuenta(unittest.TestCase):
         resultado = jugador.crear_cuenta(usuario_largo, contraseña_larga)
         self.assertEqual(resultado, "Cuenta creada exitosamente")
 
-    # Casos de error
+    # Casos de error (ojo que en el código es prioridad chequear ambos vacíos)
+    def test_ambos_vacios(self):
+        jugador = Jugador()
+        resultado = jugador.crear_cuenta("", "")
+        self.assertEqual(resultado, "Las credenciales no pueden estar vacías")
+
     def test_usuario_vacio(self):
         jugador = Jugador()
         resultado = jugador.crear_cuenta("", "contraseña123")
@@ -47,11 +51,6 @@ class TestCrearCuenta(unittest.TestCase):
         jugador = Jugador()
         resultado = jugador.crear_cuenta("usuario4", "")
         self.assertEqual(resultado, "La contraseña no puede estar vacía")
-
-    def test_ambos_vacios(self):
-        jugador = Jugador()
-        resultado = jugador.crear_cuenta("", "")
-        self.assertEqual(resultado, "Las credenciales no pueden estar vacías")
 
 if __name__ == '__main__':
     unittest.main()

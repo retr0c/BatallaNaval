@@ -6,25 +6,25 @@ class TestVisualizarPuntuaciones(unittest.TestCase):
     # Normales
     def test_agregar_puntuacion_correcta(self):
         puntuacion = Puntuacion()
-        puntuacion.agregar_puntuacion(250)
-        self.assertEqual(puntuacion.puntuaciones, [250])
+        puntuacion.agregar_puntuacion(1, 250)  # Usuario id 1
+        self.assertEqual(puntuacion.puntuaciones, [(1, 250)])
 
     def test_agregar_puntuacion_invalida(self):
         puntuacion = Puntuacion()
         with self.assertRaises(ValueError):
-            puntuacion.agregar_puntuacion("cien")
+            puntuacion.agregar_puntuacion(1, "cien")  # Puntaje inválido
 
     def test_visualizar_con_puntuaciones(self):
         puntuacion = Puntuacion()
-        puntuacion.puntuaciones = [100, 200, 300]
+        puntuacion.puntuaciones = [(1, 100), (2, 200), (3, 300)]
         resultado = puntuacion.visualizar_puntuaciones()
-        self.assertEqual(resultado, [100, 200, 300])
+        self.assertEqual(resultado, [(1, 100), (2, 200), (3, 300)])
 
     def test_visualizar_una_sola_puntuacion(self):
         puntuacion = Puntuacion()
-        puntuacion.puntuaciones = [150]
+        puntuacion.puntuaciones = [(1, 150)]
         resultado = puntuacion.visualizar_puntuaciones()
-        self.assertEqual(resultado, [150])
+        self.assertEqual(resultado, [(1, 150)])
 
     def test_visualizar_sin_puntuaciones(self):
         puntuacion = Puntuacion()
@@ -35,23 +35,23 @@ class TestVisualizarPuntuaciones(unittest.TestCase):
     # Extremas
     def test_visualizar_puntuaciones_maximas(self):
         puntuacion = Puntuacion()
-        puntuacion.puntuaciones = [99999] * 1000
+        puntuacion.puntuaciones = [(i, 99999) for i in range(1000)]
         resultado = puntuacion.visualizar_puntuaciones()
         self.assertEqual(len(resultado), 1000)
-        self.assertEqual(resultado[0], 99999)
+        self.assertEqual(resultado[0][1], 99999)
 
     def test_visualizar_puntuaciones_minimas(self):
         puntuacion = Puntuacion()
-        puntuacion.puntuaciones = [0] * 1000
+        puntuacion.puntuaciones = [(i, 0) for i in range(1000)]
         resultado = puntuacion.visualizar_puntuaciones()
         self.assertEqual(len(resultado), 1000)
-        self.assertEqual(resultado[0], 0)
+        self.assertEqual(resultado[0][1], 0)
 
     def test_visualizar_puntuaciones_muy_variadas(self):
         puntuacion = Puntuacion()
-        puntuacion.puntuaciones = [1, 100, 10000, 500, 50]
+        puntuacion.puntuaciones = [(1, 1), (2, 100), (3, 10000), (4, 500), (5, 50)]
         resultado = puntuacion.visualizar_puntuaciones()
-        self.assertEqual(resultado, [1, 100, 10000, 500, 50])
+        self.assertEqual(resultado, [(1, 1), (2, 100), (3, 10000), (4, 500), (5, 50)])
 
     # Error
     def test_visualizar_puntuaciones_nulas(self):
@@ -68,7 +68,7 @@ class TestVisualizarPuntuaciones(unittest.TestCase):
 
     def test_visualizar_puntuaciones_con_elementos_invalidos(self):
         puntuacion = Puntuacion()
-        puntuacion.puntuaciones = [100, "puntaje", 300]
+        puntuacion.puntuaciones = [(1, 100), (2, "puntaje"), (3, 300)]
         with self.assertRaises(ValueError):
             puntuacion.visualizar_puntuaciones()
 

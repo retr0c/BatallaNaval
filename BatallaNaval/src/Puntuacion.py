@@ -32,7 +32,25 @@ class Puntuacion:
 
         Retorna:
         - list: Lista de puntuaciones.
+
+        Levanta:
+        - TypeError: Si la lista de puntuaciones no es una lista.
+        - ValueError: Si algún elemento no es una tupla (usuario_id, puntaje) con puntaje int.
         """
         if desde_bd:
             return obtener_puntuaciones()
+
+        # Validar que self.puntuaciones sea lista
+        if not isinstance(self.puntuaciones, list):
+            raise TypeError("Las puntuaciones deben ser una lista.")
+
+        # Validar cada elemento
+        for elem in self.puntuaciones:
+            if not (isinstance(elem, tuple) and len(elem) == 2):
+                raise ValueError("Cada puntuación debe ser una tupla (usuario_id, puntaje).")
+            usuario_id, puntaje = elem
+            if not isinstance(puntaje, int):
+                raise ValueError("El puntaje debe ser un número entero.")
+            # opcional: podrías validar usuario_id aquí si quieres
+
         return self.puntuaciones
