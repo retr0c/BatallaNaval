@@ -88,5 +88,7 @@ python -m unittest discover -s tests -p "*.py" -v
 Para ejecutar el programa:
 python menu_consola.py
 python menu_grafico.py
+python app.py #Pegar url en el navegador
+
 
 
