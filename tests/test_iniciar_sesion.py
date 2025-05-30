@@ -1,12 +1,29 @@
 import unittest
 from BatallaNaval.src.Jugador import Jugador
+from sqlalchemy.orm import sessionmaker
+from BatallaNaval.base_datos.db import engine
+from BatallaNaval.base_datos.modelo import Usuario  # Importa el modelo Usuario
+
+Session = sessionmaker(bind=engine)
 
 class TestIniciarSesion(unittest.TestCase):
 
     def setUp(self):
-        self.jugador = Jugador()
+        # Crear sesión para manipulación directa en el test
+        self.session = Session()
         
+        # Limpiar la tabla usuarios que tengan nombre 'usuario%'
+        self.session.query(Usuario).filter(Usuario.nombre.like("usuario%")).delete()
+        self.session.commit()
+
+        # Crear instancia de Jugador pasando la sesión para que use la misma DB
+        self.jugador = Jugador(session=self.session)
+
+        # Crear cuenta para probar inicio de sesión
         self.jugador.crear_cuenta("usuario1", "contraseña123")
+
+    def tearDown(self):
+        self.session.close()
 
     def test_sesion_exitosa(self):
         resultado = self.jugador.iniciar_sesion("usuario1", "contraseña123")

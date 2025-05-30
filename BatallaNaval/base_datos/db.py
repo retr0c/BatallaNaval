@@ -40,4 +40,7 @@ def actualizar_contrasena(nombre, nueva_contrasena):
         session.close()
         return True
     session.close()
-    return False    
+    return False
+
+def obtener_puntuaciones(): 
+    pass   

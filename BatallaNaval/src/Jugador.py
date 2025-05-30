@@ -1,10 +1,17 @@
 from BatallaNaval.base_datos.db import crear_usuario, obtener_usuario,  actualizar_contrasena
-
+from sqlalchemy.orm import sessionmaker
+from BatallaNaval.base_datos.db import engine
 class Jugador:
     """Clase para el manejo de usuarios del juego."""
 
-    def __init__(self, nombre=None, contrasena=None):
+    def __init__(self, nombre=None, contrasena=None, session=None):
         """Inicializa la clase Jugador con usuario opcionalmente activo."""
+        if session is None:
+            # Crear una sesión si no se pasó ninguna
+            Session = sessionmaker(bind=engine)
+            self.session = Session()
+        else:
+            self.session = session
         self.usuario_actual = nombre
         self.contrasena = contrasena
 
@@ -12,6 +19,7 @@ class Jugador:
         """Crea una nueva cuenta de usuario."""
         if usuario == "" and contraseña == "":
             return "Las credenciales no pueden estar vacías"
+        
         if not usuario:
             return "El usuario no puede estar vacío"
         if not contraseña:

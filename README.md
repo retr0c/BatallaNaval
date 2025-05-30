@@ -82,7 +82,8 @@ python setup_db.py
 
 
 Para ejecutar las pruebas:
-python -m unittest discover -s tests -p "test_*.py"
+python -m unittest discover -s tests -p "*.py" -v
+
 
 Para ejecutar el programa:
 python menu_consola.py
