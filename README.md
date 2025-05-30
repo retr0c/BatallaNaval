@@ -90,7 +90,7 @@ python menu_consola.py
 python menu_grafico.py
 
 # Ejecutar la versión web
-
+cd web
 python app.py
 Pegar en el navegador la url proporcionada
 
