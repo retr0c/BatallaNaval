@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
-    <h2>Iniciar sesión</h2>
-    <form method="post">
-        Usuario: <input type="text" name="usuario"><br>
-        Contraseña: <input type="password" name="contrasena"><br>
-        <input type="submit" value="Entrar">
-    </form>
+    <h2>🔐 Iniciar Sesión</h2>
+
     {% if mensaje %}
-        <p>{{ mensaje }}</p>
+        <p style="color: red;">{{ mensaje }}</p>
     {% endif %}
-    <a href="{{ url_for('menu') }}">Volver al menú</a>
+
+    <form method="post" action="{{ url_for('iniciar_sesion') }}">
+        <label for="usuario">Usuario:</label><br>
+        <input type="text" id="usuario" name="usuario" required><br><br>
+
+        <label for="contrasena">Contraseña:</label><br>
+        <input type="password" id="contrasena" name="contrasena" required><br><br>
+
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('crear_cuenta') }}">¿No tienes cuenta? Crear una</a>
 </body>
 </html>

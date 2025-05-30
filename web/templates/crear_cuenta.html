@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear Cuenta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
-    <h2>Crear cuenta</h2>
-    <form method="post">
-        Usuario: <input type="text" name="usuario"><br>
-        Contraseña: <input type="password" name="contrasena"><br>
-        <input type="submit" value="Crear cuenta">
-    </form>
+    <h2>📝 Crear Cuenta</h2>
+
     {% if mensaje %}
-        <p>{{ mensaje }}</p>
+        <p style="color: green;">{{ mensaje }}</p>
     {% endif %}
-    <a href="{{ url_for('menu') }}">Volver al menú</a>
+
+    <form method="post" action="{{ url_for('crear_cuenta') }}">
+        <label for="usuario">Nuevo Usuario:</label><br>
+        <input type="text" id="usuario" name="usuario" required><br><br>
+
+        <label for="contrasena">Contraseña:</label><br>
+        <input type="password" id="contrasena" name="contrasena" required><br><br>
+
+        <button type="submit">Crear Cuenta</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('iniciar_sesion') }}">Volver a Iniciar Sesión</a>
 </body>
 </html>

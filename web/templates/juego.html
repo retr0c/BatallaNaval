@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Batalla Naval</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h2>⚓ Batalla Naval</h2>
+    <p><strong>Jugador:</strong> {{ usuario }}</p>
+
+    {% if not campo %}
+    <form method="post" action="{{ url_for('jugar') }}">
+        <label>Ancho del campo:</label>
+        <input type="number" name="ancho" required><br>
+        <label>Alto del campo:</label>
+        <input type="number" name="alto" required><br>
+        <label>Cantidad de naves:</label>
+        <input type="number" name="naves" required><br>
+        <button type="submit">Iniciar Juego</button>
+    </form>
+    {% else %}
+    <p><strong>Puntaje:</strong> {{ score }}</p>
+
+    <form method="post" action="{{ url_for('disparar') }}">
+        <label>Fila:</label>
+        <input type="number" name="fila" required>
+        <label>Columna:</label>
+        <input type="number" name="columna" required>
+        <button type="submit">Disparar</button>
+    </form>
+
+    <pre style="background: #222; color: #0f0; padding: 10px;">{{ campo_str }}</pre>
+    {% endif %}
+
+    {% if mensaje %}
+        <p style="color: green;">{{ mensaje }}</p>
+    {% elif error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('menu_principal') }}"><button>🏠 Volver al menú</button></a>
+</body>
+</html>
