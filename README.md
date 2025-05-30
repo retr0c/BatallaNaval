@@ -1,6 +1,24 @@
 # Batalla Naval
 Proyecto de juego Batalla Naval con pruebas unitarias.
 
+Este proyecto es una implementación del clásico juego Batalla Naval, desarrollado en Python, que incluye tres formas de interacción:
+
+Interfaz por consola: Para jugar desde la terminal con menús y comandos simples.
+
+Interfaz gráfica: Usando Kivy para una experiencia visual más amigable.
+
+Interfaz web: Basada en Flask, para jugar desde el navegador con funcionalidades completas de usuario (registro, inicio de sesión, cambio de contraseña, juego, etc).
+
+Además, el proyecto cuenta con:
+
+Persistencia de datos usando una base de datos PostgreSQL para guardar usuarios y partidas.
+
+Pruebas unitarias para asegurar el correcto funcionamiento de la lógica.
+
+Organización modular del código con separación de lógica, interfaz y base de datos.
+
+
+
 Pruebas Unitarias - Proyecto Batalla Naval
 
 Este documento presenta las pruebas unitarias realizadas para las funcionalidades principales del proyecto Batalla Naval.
@@ -86,12 +104,13 @@ python -m unittest discover -s tests -p "*.py" -v
 
 
 Para ejecutar el programa:
+
 python menu_consola.py
 python menu_grafico.py
 
 # Ejecutar la versión web
 cd web
-python app.py
+python app_web.py
 Pegar en el navegador la url proporcionada
 
 

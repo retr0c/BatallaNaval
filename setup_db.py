@@ -15,6 +15,15 @@ POSTGRES_SUPERUSER = "postgres"
 POSTGRES_PASSWORD = "felipe12ortiz22"  # Cambia esto si tu clave de postgres es distinta
 
 def crear_base_datos():
+    """
+    Conecta como superusuario a PostgreSQL y crea la base de datos
+    y el usuario para el sistema, si no existen.
+
+    Usa psycopg2 para conectarse a la base 'postgres' con privilegios
+    de superusuario y ejecuta sentencias SQL para creación condicional.
+
+    Muestra mensajes en consola sobre el progreso.
+    """
     print("🔧 Conectando como superusuario para crear base de datos y usuario...")
 
     conexion = psycopg2.connect(
@@ -42,6 +51,14 @@ def crear_base_datos():
     conexion.close()
 
 def crear_tablas():
+    """
+    Crea las tablas definidas en los modelos de SQLAlchemy.
+
+    Utiliza el engine configurado en DATABASE_URL para conectarse
+    a la base de datos y crea las tablas si no existen.
+
+    Muestra mensajes en consola sobre el progreso.
+    """
     print("🗂️ Creando tablas con SQLAlchemy...")
     engine = create_engine(DATABASE_URL)
     Base.metadata.create_all(engine)

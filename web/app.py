@@ -16,8 +16,17 @@ app.secret_key = 'clave-secreta-paila'
 jugador = Jugador()
 juego = Juego()
 
-# Función para mostrar el campo como string
 def renderizar_campo(campo):
+    """
+    Convierte la matriz del campo de juego en una cadena legible
+    con 'X' para impactos y '~' para agua.
+
+    Args:
+        campo (list): Matriz del campo de juego.
+
+    Returns:
+        str: Representación visual del campo.
+    """
     campo_str = ""
     for fila in campo:
         for celda in fila:
@@ -27,10 +36,23 @@ def renderizar_campo(campo):
 
 @app.route('/')
 def menu():
+    """
+    Ruta inicial. Muestra el menú principal con opciones.
+
+    Returns:
+        Render: Plantilla del menú.
+    """
     return render_template('menu.html')
 
 @app.route('/crear_cuenta', methods=['GET', 'POST'])
 def crear_cuenta():
+    """
+    Permite al usuario crear una cuenta nueva. 
+    Maneja tanto el formulario como la respuesta.
+
+    Returns:
+        Render: Página con formulario o resultado.
+    """
     if request.method == 'POST':
         usuario = request.form['usuario']
         contrasena = request.form['contrasena']
@@ -40,6 +62,12 @@ def crear_cuenta():
 
 @app.route('/iniciar_sesion', methods=['GET', 'POST'])
 def iniciar_sesion():
+    """
+    Permite al usuario iniciar sesión. Verifica credenciales.
+
+    Returns:
+        Redirect o Render: Redirige al menú principal o muestra mensaje.
+    """
     if request.method == 'POST':
         usuario = request.form['usuario']
         contrasena = request.form['contrasena']
@@ -52,21 +80,37 @@ def iniciar_sesion():
 
 @app.route('/menu_principal')
 def menu_principal():
+    """
+    Muestra el menú principal del juego si hay sesión activa.
+
+    Returns:
+        Render o Redirect: Página principal o redirección si no hay sesión.
+    """
     if 'usuario' not in session:
         return redirect(url_for('menu'))
     return render_template('menu_principal.html', usuario=session['usuario'])
 
 @app.route('/cerrar_sesion')
 def cerrar_sesion():
+    """
+    Cierra la sesión del usuario y lo redirige al menú principal.
+
+    Returns:
+        Redirect: Redirección al menú principal.
+    """
     jugador.cerrar_sesion()
     session.pop('usuario', None)
     return redirect(url_for('menu'))
 
 @app.route('/cambiar_contrasena', methods=['POST'])
 def cambiar_contrasena():
-    nueva_contrasena = request.form.get('nueva_contrasena')
+    """
+    Permite al usuario cambiar su contraseña si tiene sesión activa.
 
-    # Validar que haya usuario activo en sesión
+    Returns:
+        Redirect o str: Redirección si éxito, error en caso contrario.
+    """
+    nueva_contrasena = request.form.get('nueva_contrasena')
     usuario_actual = session.get('usuario')
     contrasena_actual = session.get('contrasena')
 
@@ -77,15 +121,19 @@ def cambiar_contrasena():
     resultado = jugador.cambiar_contraseña(nueva_contrasena)
 
     if resultado == "Contraseña cambiada exitosamente":
-        # Actualizamos la contraseña en la sesión
         session['contrasena'] = nueva_contrasena
-        return redirect(url_for('menu'))  # o a donde quieras redirigir
+        return redirect(url_for('menu'))
     else:
-        # En caso de error, devuelves el mensaje (o podrías mostrar en plantilla)
         return resultado, 400
-    
+
 @app.route('/jugar', methods=['GET', 'POST'])
 def jugar():
+    """
+    Lógica principal del juego. Permite configurar el campo y disparar.
+
+    Returns:
+        Render: Página del juego con el campo, puntaje y mensajes.
+    """
     if 'usuario' not in session:
         return redirect(url_for('menu'))
 
@@ -93,6 +141,7 @@ def jugar():
 
     if request.method == 'POST':
         if 'ancho' in request.form:
+            # Inicializar campo
             try:
                 ancho = int(request.form['ancho'])
                 alto = int(request.form['alto'])
@@ -105,6 +154,7 @@ def jugar():
             except ValueError:
                 error = "Parámetros inválidos."
         elif 'fila' in request.form:
+            # Disparar en el campo
             try:
                 fila = int(request.form['fila']) - 1
                 columna = int(request.form['columna']) - 1
@@ -143,6 +193,12 @@ def jugar():
 
 @app.route('/disparar', methods=['POST'])
 def disparar():
+    """
+    Ruta secundaria que redirige a la lógica de disparar en el juego.
+
+    Returns:
+        Response: Llama la función jugar().
+    """
     return jugar()
 
 if __name__ == '__main__':
