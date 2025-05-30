@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+    <h2>Iniciar sesión</h2>
+    <form method="post">
+        Usuario: <input type="text" name="usuario"><br>
+        Contraseña: <input type="password" name="contrasena"><br>
+        <input type="submit" value="Entrar">
+    </form>
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+    <a href="{{ url_for('menu') }}">Volver al menú</a>
+</body>
+</html>
